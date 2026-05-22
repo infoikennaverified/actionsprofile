@@ -1,12 +1,20 @@
 name: Build WF
 on:
-#  push:
-#    branches:
-#     - main
+  push:
+    branches:
+     - main
 
   pull_reuests:
     branches:
        - main
+
+  workflow_dispatch:
+
+  schedule:
+    - cron: "10 14 * * 1-5" # After noon 2:10pm, Monday to Friday
+  
+permissions:
+   contents: read
 
 jobs:
   Build:
@@ -19,6 +27,16 @@ jobs:
 
       - name: Maven Build
         run: mvn install
+      
+      - name: Upload Build Artifact (WAR)
+        uses: actions/upload-artifacts@v4
+        with:
+          name: vprofile-app
+          path: target/*.war
+
+      - name: Notify if Builds Fails
+        if: failure()
+        run: echo "⚠ build job failed! Please check logs."
   
   
   Testing:
