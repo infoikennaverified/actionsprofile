@@ -10,6 +10,8 @@ jobs:
     steps:
       -  name: Code checkout
          uses: actions/checkout@v6
+         with:
+           fetch-depth: 0
 
       - name: Maven Build
         run: mvn install
@@ -21,6 +23,8 @@ jobs:
     steps:
       -  name: Code checkout
          uses: actions/checkout@v4
+         with:
+           fetch-depth: 0
 
       - name: Run tests on main branch
         run: mvn test
