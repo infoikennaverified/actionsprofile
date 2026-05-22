@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Prerequisites
 #
 - JDK 21
@@ -23,3 +24,6 @@ sql dump file:
 - > mysql -u <user_name> -p accounts < db_backup.sql
 
 
+=======
+# actionsprofile
+>>>>>>> 7cfd69e63312ca1c051cca74297b35fb0852209e
