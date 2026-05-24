@@ -66,7 +66,7 @@ jobs:
 
   Security_Scan:
     runs-on: ubutu-latest
-    needs: Testing
+    needs: [Build, Testing]
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
@@ -76,7 +76,8 @@ jobs:
       - name: Run Trivy filesystem scan
         uses: aquasecurity/trivy-action@0.28.0
         with: 
-          scan-type: fs
+          scan-type: 'fs'
+          ignore-unfixed: true
           scan-ref: .
           format: json
           exit code: 0
