@@ -89,7 +89,7 @@ jobs:
           name: trivy-scan-results
           path: trivy-results.json
           
-  BUILD_AND_PUBLISH:
+  Build_and_Publish:
     name: BUILD_AND_PUBLISH
     runs-on: ubuntu-latest
     environment: production
