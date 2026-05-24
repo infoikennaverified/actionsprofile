@@ -60,7 +60,7 @@ jobs:
         if: github.ref != 'refs/heads/main'  
         run: echo "Skipping unit tests and code analysis"  
 
-Security_Scan:
+  Security_Scan:
     runs-on: ubutu-latest
     needs: Build
     steps:
