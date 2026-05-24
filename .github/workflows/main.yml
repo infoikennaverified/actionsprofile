@@ -4,9 +4,9 @@ on:
     branches: 
       - main
 
-  pull_request:
-    branches: 
-      - main
+#  pull_request:
+#    branches: 
+#      - main
 
   workflow_dispatch:
 
@@ -95,7 +95,7 @@ jobs:
       needs: [Build, Testing, Security_Scan]
       if: github.ref == 'refs/heads/main'
       steps:
-      - name: Code checkout
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
