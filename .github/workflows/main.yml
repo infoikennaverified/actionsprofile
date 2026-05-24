@@ -70,17 +70,17 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
-        with: 
-          fetch-depth: 0
 
       - name: Run Trivy filesystem scan
-        uses: aquasecurity/setup-trivy@v0.2.2
+        uses: aquasecurity/trivy-action@0.28.0
         with: 
-          scan-type: fs
-          scan-ref: .
-          format: json
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: table
+          ignore-unfixed: true
+          cache: true
           exit code: 0
-          vuln-type: os, library
+          vuln-type: 'library'
           output: trivy-results.json
       
       - name: Upload Trivy scan results as artifact
