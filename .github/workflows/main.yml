@@ -41,7 +41,7 @@ jobs:
   
   Testing:
     runs-on: ubuntu-latest
-    needs: Testing
+    needs: Build
     steps:
       -  name: Code checkout
          uses: actions/checkout@v4
@@ -62,7 +62,7 @@ jobs:
 
   Security_Scan:
     runs-on: ubutu-latest
-    needs: Build
+    needs: Testing
     steps:
       - name: Code checkout
         uses: actions/checkout@v4
