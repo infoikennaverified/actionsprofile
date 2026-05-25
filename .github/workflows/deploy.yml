@@ -1,0 +1,26 @@
+name: Deploy project
+on:
+ push:
+   branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    container:
+        image: node:20
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - name: GET SSH KEY and set permissions
+
+        run:
+         mkdir -p ~/SSH
+         echo "${{ secrets.AWS_SECRET_ACCESS_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+      - name: Deploy using SCP
+        run: scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -r ./dist/* ${{ secrets.AWS_SECRET_ACCESS_KEY }}@${{ secrets.AWS_SECRET_ACCESS_KEY }}:~/node-app
+      - name: Restart Server
+        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.AWS_SECRET_ACCESS_KEY }}@${{ secrets.AWS_SECRET_ACCESS_KEY }} "cd ~/node-app && npm install && pm2 restart 0"   
